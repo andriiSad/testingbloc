@@ -103,7 +103,5 @@ class LoadingScreen {
         return true;
       },
     );
-    //added test comment
-    //added test comment
   }
 }

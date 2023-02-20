@@ -12,6 +12,4 @@ class LoadingScreenController {
 
   final CloseLoadingScreen close;
   final UpdateLoadingScreen update;
-  //added test comment
-  //added test comment
 }
