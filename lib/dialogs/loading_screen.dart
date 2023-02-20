@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:testingbloc_cource/dialogs/loading_screen_controller.dart';
+import 'package:testingbloc_course/dialogs/loading_screen_controller.dart';
 
 class LoadingScreen {
   //singleton pattern

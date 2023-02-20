@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:testingbloc_cource/views/email_text_field.dart';
-import 'package:testingbloc_cource/views/login_button.dart';
-import 'package:testingbloc_cource/views/password_text_field.dart';
+import 'package:testingbloc_course/views/login_button.dart';
+import 'package:testingbloc_course/views/password_text_field.dart';
+import 'package:testingbloc_course/views/email_text_field.dart';
 
 class LoginView extends HookWidget {
   const LoginView({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testingbloc_cource/strings.dart' show enterYourPasswordHere;
+import 'package:testingbloc_course/strings.dart' show enterYourPasswordHere;
 
 class PasswordTextField extends StatelessWidget {
   const PasswordTextField({super.key, required this.passwordController});

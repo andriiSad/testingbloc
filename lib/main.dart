@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testingbloc_cource/apis/login_api.dart';
-import 'package:testingbloc_cource/apis/notes_api.dart';
-import 'package:testingbloc_cource/bloc/actions.dart';
-import 'package:testingbloc_cource/bloc/app_bloc.dart';
-import 'package:testingbloc_cource/bloc/app_state.dart';
-import 'package:testingbloc_cource/dialogs/generic_dialog.dart';
-import 'package:testingbloc_cource/dialogs/loading_screen.dart';
-import 'package:testingbloc_cource/models.dart';
-import 'package:testingbloc_cource/strings.dart';
-import 'package:testingbloc_cource/views/iterable_list_view.dart';
-import 'package:testingbloc_cource/views/login_view.dart';
+import 'package:testingbloc_course/apis/login_api.dart';
+import 'package:testingbloc_course/apis/notes_api.dart';
+import 'package:testingbloc_course/bloc/actions.dart';
+import 'package:testingbloc_course/bloc/app_bloc.dart';
+import 'package:testingbloc_course/bloc/app_state.dart';
+import 'package:testingbloc_course/dialogs/generic_dialog.dart';
+import 'package:testingbloc_course/dialogs/loading_screen.dart';
+import 'package:testingbloc_course/models.dart';
+import 'package:testingbloc_course/strings.dart';
+import 'package:testingbloc_course/views/iterable_list_view.dart';
+import 'package:testingbloc_course/views/login_view.dart';
 
 void main() {
   runApp(
@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
       create: (context) => AppBloc(
         loginApi: LoginApi(),
         notesApi: NotesApi(),
+        acceptedLoginHandle: const LoginHandle.fooBar(),
       ),
       child: Scaffold(
         appBar: AppBar(

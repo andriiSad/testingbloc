@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:testingbloc_cource/models.dart';
+import 'package:testingbloc_course/models.dart';
 
 @immutable
 abstract class NotesApiProtocol {
