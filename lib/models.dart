@@ -32,7 +32,7 @@ class Note {
   final String title;
 
   @override
-  String toString() => 'Note(title = $title)';
+  String toString() => title;
 }
 
 final mockNotes = Iterable.generate(
