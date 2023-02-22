@@ -1,61 +1,43 @@
-import 'package:flutter/services.dart';
+import 'package:bloc/bloc.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:testingbloc_course/bloc/app_event.dart';
 import 'package:testingbloc_course/bloc/app_state.dart';
-import 'package:testingbloc_course/bloc/bloc_events.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:math' as math;
-
-typedef AppBlocRandomUrlPicker = String Function(Iterable<String> allUrls);
-typedef AppBlocUrlLoader = Future<Uint8List> Function(String url);
-
-extension RandomElement<T> on Iterable<T> {
-  T getRandomElement() => elementAt(math.Random().nextInt(length));
-}
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  AppBloc({
-    required Iterable<String> urls,
-    Duration? waitBeforeLoading,
-    AppBlocRandomUrlPicker? urlPicker,
-    AppBlocUrlLoader? urlLoader,
-  }) : super(
-          const AppState.empty(),
+  AppBloc()
+      : super(
+          const AppStateLoggedOut(
+            isLoading: false,
+          ),
         ) {
-    on<LoadNextUrlEvent>((event, emit) async {
-      //start loading
-      emit(
-        const AppState(
-          isLoading: true,
-          data: null,
-          error: null,
-        ),
-      );
-      final url = (urlPicker ?? _pickRandomUrl)(urls);
-      try {
-        if (waitBeforeLoading != null) {
-          await Future.delayed(waitBeforeLoading);
+    //handle uploading images
+    on<AppEventUploadImage>(
+      (event, emit) async {
+        final user = state.user;
+        // log user out if we don't have an actual user in app state
+        if (user == null) {
+          emit(
+            const AppStateLoggedOut(
+              isLoading: false,
+            ),
+          );
+          return;
         }
-        final data = await (urlLoader ?? _loadUrl)(url);
-
+        //start the loading process
         emit(
-          AppState(
-            isLoading: false,
-            data: data,
-            error: null,
+          AppStateLoggedIn(
+            isLoading: true,
+            user: user,
+            images: state.images ?? [],
           ),
         );
-      } catch (e) {
-        emit(
-          AppState(
-            isLoading: false,
-            data: null,
-            error: e,
-          ),
-        );
-      }
-    });
+      },
+    );
   }
-  String _pickRandomUrl(Iterable<String> allUrls) => allUrls.getRandomElement();
-  Future<Uint8List> _loadUrl(String url) => NetworkAssetBundle(Uri.parse(url))
-      .load(url)
-      .then((byteData) => byteData.buffer.asUint8List());
+
+  Future<Iterable<Reference>> _getImages(String userId) =>
+      FirebaseStorage.instance
+          .ref(userId)
+          .list()
+          .then((listResult) => listResult.items);
 }
