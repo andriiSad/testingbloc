@@ -61,7 +61,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         } on FirebaseAuthException catch (e) {
           emit(
             AppStateLoggedOut(
-              isLoading: true,
+              isLoading: false,
               authError: AuthError.from(e),
             ),
           );
